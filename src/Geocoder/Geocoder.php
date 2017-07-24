@@ -8,6 +8,10 @@ class Geocoder
     const VALID_OUTPUT_FORMAT = ['json', 'xml'];
 
     private $apiKey;
+    private $rawResponse;
+    private $status;
+    private $errorMessage;
+    private $results;
 
     public function __construct($apiKey = '')
     {
@@ -37,7 +41,7 @@ class Geocoder
      *
      * @throws \Exception
      *
-     * @return string
+     * @return $this
      */
     public function geocode($address, $region = '', $outputFormat = 'json')
     {
@@ -45,7 +49,25 @@ class Geocoder
             throw new \Exception("'{$outputFormat}' is not a valid format");
         }
 
-        return file_get_contents($this->generateRequestUrl($address, $region, $outputFormat));
+        $rawResponse = file_get_contents($this->generateRequestUrl($address, $region, $outputFormat));
+
+        $this->processRawResponse($rawResponse);
+
+        return $rawResponse;
+    }
+
+    private function processRawResponse($rawResponse)
+    {
+        $this->setRawResponse($rawResponse);
+
+        $responseArray = json_decode($rawResponse, true);
+        $this->setStatus($responseArray['status']);
+
+        if (isset($responseArray['error_message'])) {
+            $this->setErrorMessage($responseArray['error_message']);
+        }
+
+        $this->setResults($responseArray['results']);
     }
 
     /**
@@ -55,15 +77,14 @@ class Geocoder
      */
     public function getLatLng($address)
     {
-        $result = $this->geocode($address);
-        $result = json_decode($result, true);
+        $this->geocode($address);
 
-        if ($result['status'] !== 'OK') {
+        if ($this->getStatus() !== 'OK') {
             return;
         }
 
         $latLng = [];
-        foreach ($result['results'] as $result) {
+        foreach ($this->getResults() as $result) {
             $latLng[] = [
                 'lat' => $result['geometry']['location']['lat'],
                 'lng' => $result['geometry']['location']['lng'],
@@ -108,5 +129,69 @@ class Geocoder
         }
 
         return $baseUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRawResponse()
+    {
+        return $this->rawResponse;
+    }
+
+    /**
+     * @param string $rawResponse
+     */
+    public function setRawResponse($rawResponse)
+    {
+        $this->rawResponse = $rawResponse;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getErrorMessage()
+    {
+        return $this->errorMessage;
+    }
+
+    /**
+     * @param string $errorMessage
+     */
+    public function setErrorMessage($errorMessage)
+    {
+        $this->errorMessage = $errorMessage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
+
+    /**
+     * @param mixed $results
+     */
+    public function setResults($results)
+    {
+        $this->results = $results;
     }
 }
