@@ -12,9 +12,31 @@ class GeocoderTest extends TestCase
 
     public function testGeocode()
     {
+        $geocoder = new Geocoder();
+
         $this->assertEquals(
             $this->getExpectedData(),
-            (new Geocoder())->geocode(self::VALID_ADDRESS)
+            $geocoder->geocode(self::VALID_ADDRESS)
+        );
+
+        $this->assertEquals(
+            $this->getExpectedData(),
+            $geocoder->getRawResponse()
+        );
+    }
+
+    public function testGeocodeInvalidApiKey()
+    {
+        $geocoder = new Geocoder('invalidApiKey');
+
+        $this->assertEquals(
+            $this->getExpectedInvalidKeyData(),
+            $geocoder->geocode(self::VALID_ADDRESS)
+        );
+
+        $this->assertEquals(
+            'The provided API key is invalid.',
+            $geocoder->getErrorMessage()
         );
     }
 
@@ -93,6 +115,16 @@ class GeocoderTest extends TestCase
             6,
             count((new Geocoder())->getLatLng(self::VALID_ADDRESS_MULTIPLE_RESULT))
         );
+    }
+
+    private function getExpectedInvalidKeyData()
+    {
+        return '{
+   "error_message" : "The provided API key is invalid.",
+   "results" : [],
+   "status" : "REQUEST_DENIED"
+}
+';
     }
 
     private function getExpectedNullData()

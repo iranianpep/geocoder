@@ -4,7 +4,7 @@ namespace Geocoder;
 
 class Geocoder
 {
-    const API_URL = 'http://maps.google.com/maps/api/geocode';
+    const API_URL = 'https://maps.google.com/maps/api/geocode';
     const VALID_OUTPUT_FORMAT = ['json', 'xml'];
 
     private $apiKey;
@@ -56,6 +56,9 @@ class Geocoder
         return $rawResponse;
     }
 
+    /**
+     * @param $rawResponse
+     */
     private function processRawResponse($rawResponse)
     {
         $this->setRawResponse($rawResponse);
