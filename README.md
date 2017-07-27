@@ -19,3 +19,5 @@ A class for handling geocoding.
 - Get the Google Maps Geocoding API key: https://developers.google.com/maps/documentation/geocoding/get-api-key
 - `$result = (new Geocoder('THE_API_KEY'))->geocode('THE_ADDRESS');`
 - To get latitude and longitude `(new Geocoder('THE_API_KEY'))->getLatLng('THE_ADDRESS')`
+
+Demo: https://www.notifyontime.com/geocoder
