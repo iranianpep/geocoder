@@ -13,6 +13,11 @@ class Geocoder
     private $errorMessage;
     private $results;
 
+    /**
+     * Geocoder constructor.
+     *
+     * @param string $apiKey
+     */
     public function __construct($apiKey = '')
     {
         $this->setApiKey($apiKey);

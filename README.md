@@ -1,5 +1,5 @@
 # Geocoder
-A class for handling geocoding.
+A class to handle Google geocoding.
 
 [![Latest Stable Version](https://poser.pugx.org/geocoder/geocoder/v/stable)](https://packagist.org/packages/geocoder/geocoder)
 [![Build Status](https://travis-ci.org/iranianpep/geocoder.svg?branch=master)](https://travis-ci.org/iranianpep/geocoder)
@@ -16,8 +16,9 @@ A class for handling geocoding.
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/iranianpep/geocoder/master/LICENSE)
 
 ## Usage
-- Get the Google Maps Geocoding API key: https://developers.google.com/maps/documentation/geocoding/get-api-key
-- `$result = (new Geocoder('THE_API_KEY'))->geocode('THE_ADDRESS');`
-- To get latitude and longitude `(new Geocoder('THE_API_KEY'))->getLatLng('THE_ADDRESS')`
+- Get the Google Maps Geocoding API key:<br> https://developers.google.com/maps/documentation/geocoding/get-api-key
+- Install this package in your project:<br> `composer require geocoder/geocoder`
+- To geocode an address:<br> `$result = (new Geocoder('THE_API_KEY'))->geocode('THE_ADDRESS');`
+- To get latitude and longitude:<br> `(new Geocoder('THE_API_KEY'))->getLatLng('THE_ADDRESS')`
 
 Demo: https://www.notifyontime.com/geocoder
