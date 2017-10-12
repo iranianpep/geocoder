@@ -8,7 +8,7 @@ class GeocoderTest extends TestCase
 {
     const VALID_ADDRESS = 'Melbourne, Australia';
     const VALID_ADDRESS_MULTIPLE_RESULT = 'springfield';
-    const UNKNOWN_ADDRESS = 'Dummy Address';
+    const UNKNOWN_ADDRESS = 'ReallyDummyAddress';
 
     public function testGeocode()
     {
