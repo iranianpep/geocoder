@@ -120,13 +120,12 @@ class Geocoder
      * @param        $address
      * @param string $region
      * @param string $outputFormat
-     * @param bool   $sensor
      *
      * @return string
      */
-    private function generateRequestUrl($address, $region = '', $outputFormat = 'json', $sensor = false)
+    private function generateRequestUrl($address, $region = '', $outputFormat = 'json')
     {
-        $baseUrl = self::API_URL.'/'.$outputFormat.'?address='.urlencode($address).'&sensor='.$sensor;
+        $baseUrl = self::API_URL.'/'.$outputFormat.'?address='.urlencode($address);
 
         if (!empty($region)) {
             $baseUrl .= "&region={$region}";
@@ -201,5 +200,24 @@ class Geocoder
     public function setResults($results)
     {
         $this->results = $results;
+    }
+
+    /**
+     * Check if the address exists
+     * Normally 'ZERO_RESULTS' is returned if address does not exist
+     *
+     * @param $address
+     * @param string $region
+     * @return bool
+     */
+    public function isAddressValid($address, $region = '')
+    {
+        $this->geocode($address, $region);
+
+        if ($this->getStatus() === 'OK') {
+            return true;
+        }
+
+        return false;
     }
 }

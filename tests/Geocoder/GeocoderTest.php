@@ -117,6 +117,11 @@ class GeocoderTest extends TestCase
         );
     }
 
+    public function testIsAddressValid()
+    {
+        $this->assertFalse((new Geocoder())->isAddressValid(self::UNKNOWN_ADDRESS));
+    }
+
     private function getExpectedInvalidKeyData()
     {
         return '{
