@@ -223,7 +223,7 @@ class Geocoder
     }
 
     /**
-     * Check if there are multiple results (more than 1)
+     * Check if there are multiple results (more than 1).
      *
      * @return bool
      */
