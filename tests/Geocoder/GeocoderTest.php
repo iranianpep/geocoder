@@ -119,6 +119,7 @@ class GeocoderTest extends TestCase
 
     public function testIsAddressValid()
     {
+        $this->assertTrue((new Geocoder())->isAddressValid(self::VALID_ADDRESS));
         $this->assertFalse((new Geocoder())->isAddressValid(self::UNKNOWN_ADDRESS));
     }
 
