@@ -204,10 +204,11 @@ class Geocoder
 
     /**
      * Check if the address exists
-     * Normally 'ZERO_RESULTS' is returned if address does not exist
+     * Normally 'ZERO_RESULTS' is returned if address does not exist.
      *
      * @param $address
      * @param string $region
+     *
      * @return bool
      */
     public function isAddressValid($address, $region = '')
