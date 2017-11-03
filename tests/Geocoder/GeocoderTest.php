@@ -123,6 +123,19 @@ class GeocoderTest extends TestCase
         $this->assertFalse((new Geocoder())->isAddressValid(self::UNKNOWN_ADDRESS));
     }
 
+    public function testHasMultipleResults()
+    {
+        $geocoder = new Geocoder();
+        $geocoder->geocode(self::VALID_ADDRESS);
+        $this->assertFalse($geocoder->hasMultipleResults());
+
+        $geocoder->geocode(self::VALID_ADDRESS_MULTIPLE_RESULT);
+        $this->assertTrue($geocoder->hasMultipleResults());
+
+        $geocoder->geocode(self::UNKNOWN_ADDRESS);
+        $this->assertFalse($geocoder->hasMultipleResults());
+    }
+
     private function getExpectedInvalidKeyData()
     {
         return '{

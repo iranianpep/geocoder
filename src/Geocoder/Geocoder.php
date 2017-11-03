@@ -221,4 +221,18 @@ class Geocoder
 
         return false;
     }
+
+    /**
+     * Check if there are multiple results (more than 1).
+     *
+     * @return bool
+     */
+    public function hasMultipleResults()
+    {
+        if ($this->getStatus() === 'OK' && count($this->getResults()) > 1) {
+            return true;
+        }
+
+        return false;
+    }
 }
