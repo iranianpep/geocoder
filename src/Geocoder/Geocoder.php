@@ -18,7 +18,7 @@ class Geocoder
      *
      * @param string $apiKey
      */
-    public function __construct($apiKey = '')
+    public function __construct(string $apiKey = '')
     {
         $this->setApiKey($apiKey);
     }
@@ -26,7 +26,7 @@ class Geocoder
     /**
      * @return string
      */
-    public function getApiKey()
+    public function getApiKey(): string
     {
         return $this->apiKey;
     }
@@ -34,7 +34,7 @@ class Geocoder
     /**
      * @param string $apiKey
      */
-    public function setApiKey($apiKey)
+    public function setApiKey(string $apiKey)
     {
         $this->apiKey = $apiKey;
     }
@@ -48,7 +48,7 @@ class Geocoder
      *
      * @return $this
      */
-    public function geocode($address, $region = '', $outputFormat = 'json')
+    public function geocode(string $address, string $region = '', string $outputFormat = 'json')
     {
         if ($this->validateOutputFormat($outputFormat) !== true) {
             throw new \Exception("'{$outputFormat}' is not a valid format");
@@ -107,7 +107,7 @@ class Geocoder
      *
      * @return bool
      */
-    private function validateOutputFormat($format)
+    private function validateOutputFormat(string $format): bool
     {
         if (in_array($format, self::VALID_OUTPUT_FORMAT)) {
             return true;
@@ -123,7 +123,7 @@ class Geocoder
      *
      * @return string
      */
-    private function generateRequestUrl($address, $region = '', $outputFormat = 'json')
+    private function generateRequestUrl(string $address, string $region = '', string $outputFormat = 'json'): string
     {
         $baseUrl = self::API_URL.'/'.$outputFormat.'?address='.urlencode($address);
 
@@ -157,7 +157,7 @@ class Geocoder
     /**
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -165,7 +165,7 @@ class Geocoder
     /**
      * @param string $status
      */
-    public function setStatus($status)
+    public function setStatus(string $status)
     {
         $this->status = $status;
     }
@@ -173,7 +173,7 @@ class Geocoder
     /**
      * @return string
      */
-    public function getErrorMessage()
+    public function getErrorMessage(): string
     {
         return $this->errorMessage;
     }
@@ -181,7 +181,7 @@ class Geocoder
     /**
      * @param string $errorMessage
      */
-    public function setErrorMessage($errorMessage)
+    public function setErrorMessage(string $errorMessage)
     {
         $this->errorMessage = $errorMessage;
     }
@@ -211,7 +211,7 @@ class Geocoder
      *
      * @return bool
      */
-    public function isAddressValid($address, $region = '')
+    public function isAddressValid(string $address, string $region = ''): bool
     {
         $this->geocode($address, $region);
 

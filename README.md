@@ -15,6 +15,9 @@ A class to handle Google geocoding.
 [![Packagist](https://img.shields.io/packagist/dt/geocoder/geocoder.svg)](https://packagist.org/packages/geocoder/geocoder)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/iranianpep/geocoder/master/LICENSE)
 
+## Server Requirements
+- PHP >= 7.0.0
+
 ## Usage
 - Get the Google Maps Geocoding API key:<br> https://developers.google.com/maps/documentation/geocoding/get-api-key
 - Install this package in your project:<br> `composer require geocoder/geocoder`
