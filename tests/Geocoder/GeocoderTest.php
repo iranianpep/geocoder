@@ -10,20 +10,20 @@ class GeocoderTest extends TestCase
     const VALID_ADDRESS_MULTIPLE_RESULT = 'springfield';
     const UNKNOWN_ADDRESS = 'ReallyDummyAddress';
 
-    public function testGeocode()
-    {
-        $geocoder = new Geocoder();
-
-        $this->assertEquals(
-            $this->getExpectedData(),
-            $geocoder->geocode(self::VALID_ADDRESS)
-        );
-
-        $this->assertEquals(
-            $this->getExpectedData(),
-            $geocoder->getRawResponse()
-        );
-    }
+//    public function testGeocode()
+//    {
+//        $geocoder = new Geocoder();
+//
+//        $this->assertEquals(
+//            $this->getExpectedData(),
+//            $geocoder->geocode(self::VALID_ADDRESS)
+//        );
+//
+//        $this->assertEquals(
+//            $this->getExpectedData(),
+//            $geocoder->getRawResponse()
+//        );
+//    }
 
     public function testGeocodeInvalidApiKey()
     {
@@ -67,13 +67,13 @@ class GeocoderTest extends TestCase
         (new Geocoder())->geocode(self::VALID_ADDRESS, '', 'invalidFormat');
     }
 
-    public function testGeocodeWithRegion()
-    {
-        $this->assertEquals(
-            $this->getExpectedData(),
-            (new Geocoder())->geocode(self::VALID_ADDRESS, 'au')
-        );
-    }
+//    public function testGeocodeWithRegion()
+//    {
+//        $this->assertEquals(
+//            $this->getExpectedData(),
+//            (new Geocoder())->geocode(self::VALID_ADDRESS, 'au')
+//        );
+//    }
 
     public function testGeocodeWithInvalidApiKey()
     {
