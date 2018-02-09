@@ -40,16 +40,16 @@ class GeocoderTest extends TestCase
         );
     }
 
-    public function testGeocodeMultipleResult()
-    {
-        $result = (new Geocoder())->geocode(self::VALID_ADDRESS_MULTIPLE_RESULT);
-        $result = json_decode($result, true);
-
-        $this->assertEquals(
-            6,
-            count($result['results'])
-        );
-    }
+//    public function testGeocodeMultipleResult()
+//    {
+//        $result = (new Geocoder())->geocode(self::VALID_ADDRESS_MULTIPLE_RESULT);
+//        $result = json_decode($result, true);
+//
+//        $this->assertEquals(
+//            6,
+//            count($result['results'])
+//        );
+//    }
 
 //    public function testGeocodeUnknownAddress()
 //    {
