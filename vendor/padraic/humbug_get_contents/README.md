@@ -1,13 +1,11 @@
-# humbug_get_contents
+humbug_get_contents
+===================
 
-[![Package version](https://img.shields.io/packagist/v/padraic/humbug_get_contents.svg?style=flat-square)](https://packagist.org/packages/padraic/humbug_get_contents)
-[![Build Status](https://img.shields.io/travis/humbug/file_get_contents.svg?branch=master&style=flat-square)](https://travis-ci.org/humbug/file_get_contents?branch=master)
-[![Slack](https://img.shields.io/badge/slack-%23humbug-red.svg?style=flat-square)](https://symfony.com/slack-invite)
-[![License](https://img.shields.io/badge/license-MIT-red.svg?style=flat-square)](LICENSE)
+[![Build Status](https://travis-ci.org/padraic/file_get_contents.svg)](https://travis-ci.org/padraic/file_get_contents)
 
-Defines a `Humbug\get_contents()` function that will transparently call `file_get_contents()`,
+Defines a `humbug_get_contents()` function that will transparently call `file_get_contents()`,
 except for HTTPS URIs where it will inject a context configured to enable secure
-SSL/TLS requests on all versions of PHP 5.3+.
+SSL/TLS requests on all versions of PHP less than 5.6.
 
 All versions of PHP below 5.6 not only disable SSL/TLS protections by default, but
 have most other default options set insecurely. This has led to
@@ -16,20 +14,23 @@ PHAR files or API requests. Without SSL/TLS protections, all such requests are v
 to Man-In-The-Middle attacks where a hacker can inject a fake response, e.g. a tailored php
 file or json response.
 
-## Installation
+Installation
+============
 
-```bash
-composer require padraic/humbug_get_contents
+```json
+require: {
+   "padraic/humbug_get_contents": "~1.0"
+}
 ```
 
-
-## Usage
+Usage
+=====
 
 ```php
-$content = Humbug\get_contents('https://www.howsmyssl.com/a/check');
+$content = humbug_get_contents('https://www.howsmyssl.com/a/check');
 ```
 
-You can use this function as an immediate alternative to `file_get_contents()` in any code
+You can use this function as an immediate alternative to file_get_contents() in any code
 location where HTTP requests are probable.
 
 This solution was originally implemented within the Composer Installer, so this is a
@@ -45,8 +46,7 @@ actually the point ;). An error should have two causes:
 Neither is, in any way, a justification for disabling SSL/TLS and leaving end users vulnerable
 to getting hacked. Resolve such errors; don't ignore or workaround them.
 
-
-## Headers
+###Headers
 
 You can set request headers, and get response headers, using the following functions.
 This support is based around stream contexts, but is offered in some limited form
@@ -54,30 +54,22 @@ here as a convenience. If your needs are going to extend this, you should use a
 more complete solution and double check that it fully enables and supports TLS.
 
 ```php
-// Don't end headers with \r\n when setting via array
-Humbug\set_headers([
+/**
+ * Don't end headers with \r\n when setting via array
+ */
+humbug_set_headers(array(
     'Accept-Language: da',
-    'User-Agent: Humbug',
-]);
-
-$response = Humbug\get_contents('http://www.example.com');
+    'User-Agent: Humbug'
+));
+$response = humbug_get_contents('http://www.example.com');
 ```
 
 Request headers are emptied when used, so you would need to reset on each
-`Humbug\get_contents()` call.
+`humbug_get_contents()` call.
 
 To retrieve an array of the last response headers:
 
 ```php
-$response = Humbug\get_contents('http://www.example.com');
-$headers = Humbug\get_headers();
+$response = humbug_get_contents('http://www.example.com');
+$headers = humbug_get_headers();
 ```
-
-## Upgrade
-
-[Upgrade Guide](UPGRADE.md)
-
-
-## Contributing
-
-[Contribution Guide](CONTRIBUTING.md)
