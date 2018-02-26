@@ -10,20 +10,22 @@ class GeocoderTest extends TestCase
     const VALID_ADDRESS_MULTIPLE_RESULT = 'springfield';
     const UNKNOWN_ADDRESS = 'ReallyDummyAddress';
 
-//    public function testGeocode()
-//    {
-//        $geocoder = new Geocoder();
-//
-//        $this->assertEquals(
-//            $this->getExpectedData(),
-//            $geocoder->geocode(self::VALID_ADDRESS)
-//        );
-//
-//        $this->assertEquals(
-//            $this->getExpectedData(),
-//            $geocoder->getRawResponse()
-//        );
-//    }
+    const GEOCODE_FUNCTION = 'geocode';
+
+    public function testGeocode()
+    {
+        $stub = $this->createMock(Geocoder::class);
+
+        $stub->method(self::GEOCODE_FUNCTION)
+            ->willReturn($this->getExpectedData());
+
+        $result = $stub->geocode(self::VALID_ADDRESS);
+
+        $this->assertEquals(
+            $this->getExpectedData(),
+            $result
+        );
+    }
 
     public function testGeocodeInvalidApiKey()
     {
@@ -51,13 +53,18 @@ class GeocoderTest extends TestCase
 //        );
 //    }
 
-//    public function testGeocodeUnknownAddress()
-//    {
-//        $this->assertEquals(
-//            $this->getExpectedNullData(),
-//            (new Geocoder())->geocode(self::UNKNOWN_ADDRESS)
-//        );
-//    }
+    public function testGeocodeUnknownAddress()
+    {
+        $stub = $this->createMock(Geocoder::class);
+
+        $stub->method(self::GEOCODE_FUNCTION)
+            ->willReturn($this->getExpectedNullData());
+
+        $this->assertEquals(
+            $this->getExpectedNullData(),
+            $stub->geocode(self::UNKNOWN_ADDRESS)
+        );
+    }
 
     public function testGeocodeInvalidFormat()
     {
@@ -67,13 +74,20 @@ class GeocoderTest extends TestCase
         (new Geocoder())->geocode(self::VALID_ADDRESS, '', 'invalidFormat');
     }
 
-//    public function testGeocodeWithRegion()
-//    {
-//        $this->assertEquals(
-//            $this->getExpectedData(),
-//            (new Geocoder())->geocode(self::VALID_ADDRESS, 'au')
-//        );
-//    }
+    public function testGeocodeWithRegion()
+    {
+        $stub = $this->createMock(Geocoder::class);
+
+        $stub->method(self::GEOCODE_FUNCTION)
+            ->willReturn($this->getExpectedData());
+
+        $result = $stub->geocode(self::VALID_ADDRESS, 'au');
+
+        $this->assertEquals(
+            $this->getExpectedData(),
+            $result
+        );
+    }
 
     public function testGeocodeWithInvalidApiKey()
     {
